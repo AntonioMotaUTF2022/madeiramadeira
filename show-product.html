@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style/main.css"/> 
+    </head>
+    <body>
+        <header>
+            <a href="index.html" class="logo"></a>
+            <div class="search">
+                <input type="text" class="search-text-input" search-text>
+                <input type="button" class="search-button-input" search-button>
+            </div>
+        </header>
+        <div class="show-product-container">
+            <div class="product-title" product-title></div>
+            <div class="show-product-carousel-container">
+                <div class="show-product-carousel" show-product-carousel>
+                </div>
+                <div class="show-product-image-container">
+                    <img product-image>
+                </div>
+            </div>
+            <div class="product-description"></div>
+        </div>
+        <footer>
+
+        </footer>
+        <script type="module" src="/script/controller/show-product-controller.js"></script>
+        <script type="module" src="/script/controller/search-products-controller.js"></script>
+    </body>
+</html>
