@@ -26,13 +26,8 @@ const getItems = async () => {
 
   const products = []
   querySnapshot.forEach( (doc) => {
-    console.log(doc)
-    products.push({
-      ...doc.data()
-    })
+    products.push({...doc.data()})
   })
-
-  console.log(products)
   return products
 }
 
