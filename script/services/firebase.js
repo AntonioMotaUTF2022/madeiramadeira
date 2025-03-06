@@ -18,10 +18,10 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = initializeFirestore(app, {experimentalForceLongPolling: true})
-const collection = collection(db, "all-products")
+const collectionQuery = collection(db, "all-products")
 
 const getItems = () => {
-  const q = query(collection)
+  const q = query(collectionQuery)
   const unsubscribe = onSnapshot(q, (snapshot) => {
     const researches = []
     snapshot.forEach( (doc) => {
