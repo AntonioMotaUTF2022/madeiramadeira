@@ -24,9 +24,9 @@ export default function newProductCard(product) {
 
 async function loadCarousel(carousel) {
     const products = await getItems()
-    console.log(products)
     products.forEach(
         product => {
+            console.log(product.title)
             carousel.appendChild(
                 newProductCard(product)
             )
