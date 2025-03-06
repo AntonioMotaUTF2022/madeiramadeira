@@ -1,4 +1,4 @@
-import { getItems } from "./firebase"
+import { getItems } from "./firebase.js"
 
 async function loadProducts() {
     const productsJson = await getItems()
