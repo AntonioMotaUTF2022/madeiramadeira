@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-import { initializeFirestore, collection, query } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js"
+import { initializeFirestore, collection, query, getDocs } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -20,19 +20,15 @@ const app = initializeApp(firebaseConfig);
 const db = initializeFirestore(app, {experimentalForceLongPolling: true})
 const collectionQuery = collection(db, "all-products")
 
-const getItems = () => {
+const getItems = async () => {
   const q = query(collectionQuery)
+  const querySnapshot = await getDocs(q)
   const unsubscribe = onSnapshot(q, (snapshot) => {
-    const items = []
-    snapshot.forEach( (doc) => {
-      researches.push({
-        id: doc.id,
-        ...doc.data()
-      })
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id, " => ", doc.data());
     })
   })
-  console.log(items)
-  return items
+  return
 }
 
 getItems()
