@@ -21,8 +21,8 @@ export default function newProductCard(product) {
     return productCard
 }
 
-async function loadCarousel(carousel, searchString) {
-    const products = await api_service.loadProducts(searchString)
+async function loadCarousel(carousel) {
+    const products = await api_service.loadProducts()
     products.forEach(
         product => {
             carousel.appendChild(
@@ -32,10 +32,11 @@ async function loadCarousel(carousel, searchString) {
     )
 }
 
-loadCarousel(document.querySelector("[carousel-1]"), "")
-loadCarousel(document.querySelector("[carousel-2]"), "cozinha")
-loadCarousel(document.querySelector("[carousel-3]"), "sala de jantar")
-loadCarousel(document.querySelector("[carousel-4]"), "sala de estar")
-loadCarousel(document.querySelector("[carousel-5]"), "quarto")
-loadCarousel(document.querySelector("[carousel-6]"), "escritorio")
-loadCarousel(document.querySelector("[carousel-7]"), "infantil")
+loadCarousel(document.querySelector("[carousel-1]"))
+
+// loadCarousel(document.querySelector("[carousel-2]"), "cozinha")
+// loadCarousel(document.querySelector("[carousel-3]"), "sala de jantar")
+// loadCarousel(document.querySelector("[carousel-4]"), "sala de estar")
+// loadCarousel(document.querySelector("[carousel-5]"), "quarto")
+// loadCarousel(document.querySelector("[carousel-6]"), "escritorio")
+// loadCarousel(document.querySelector("[carousel-7]"), "infantil")

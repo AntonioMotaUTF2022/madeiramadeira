@@ -8,8 +8,6 @@ async function loadProducts() {
     return productsVector
 }
 
-loadProducts()
-
 async function loadAnnounce(announceId) {
     var announce = await fetch(`http://localhost:3000/announces?announceId=${announceId}`)
     announce = await announce.json()
