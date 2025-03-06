@@ -5,7 +5,7 @@ async function loadProducts() {
     console.log(productsJson)
     const productsVector = await productsJson.json()
     console.log(productsVector)
-    return productsVectorFiltered
+    return productsVector
 }
 
 loadProducts()
