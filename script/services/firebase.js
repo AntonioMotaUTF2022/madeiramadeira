@@ -23,6 +23,7 @@ const collectionQuery = collection(db, "all-products")
 const getItems = async () => {
   const q = query(collectionQuery)
   const querySnapshot = await getDocs(q)
+  console.log(querySnapshot)
   return querySnapshot
 }
 
