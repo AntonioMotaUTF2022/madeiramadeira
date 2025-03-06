@@ -1,17 +1,14 @@
 import { getItems } from "./firebase"
 
-async function loadProducts(searchString) {
+async function loadProducts() {
     const productsJson = await getItems()
     console.log(productsJson)
     const productsVector = await productsJson.json()
-    const productsVectorFiltered = []
-    productsVector.forEach(
-        product => {
-            if(JSON.stringify(product).toLowerCase().includes(searchString)) productsVectorFiltered.push(product)
-        }
-    )
+    console.log(productsVector)
     return productsVectorFiltered
 }
+
+loadProducts()
 
 async function loadAnnounce(announceId) {
     var announce = await fetch(`http://localhost:3000/announces?announceId=${announceId}`)
