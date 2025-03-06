@@ -1,4 +1,5 @@
 import { api_service } from '../services/api-service.js'
+import { getItems } from '../services/firebase.js'
 
 export default function newProductCard(product) {
     const productCard = document.createElement('a')
@@ -22,7 +23,8 @@ export default function newProductCard(product) {
 }
 
 async function loadCarousel(carousel) {
-    const products = await api_service.loadProducts()
+    const products = await getItems()
+    console.log(products)
     products.forEach(
         product => {
             carousel.appendChild(
