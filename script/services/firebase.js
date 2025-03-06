@@ -23,10 +23,8 @@ const collectionQuery = collection(db, "all-products")
 const getItems = async () => {
   const q = query(collectionQuery)
   const querySnapshot = await getDocs(q)
-  const unsubscribe = onSnapshot(q, (snapshot) => {
-    querySnapshot.forEach((doc) => {
-      console.log(doc.id, " => ", doc.data());
-    })
+  querySnapshot.forEach((doc) => {
+    console.log(doc.id, " => ", doc.data());
   })
   return
 }
