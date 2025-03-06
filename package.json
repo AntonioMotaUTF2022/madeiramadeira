@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "firebase": "^11.4.0",
     "json-server": "^1.0.0-alpha.23"
   }
 }
