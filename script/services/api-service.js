@@ -1,5 +1,8 @@
+import { getItems } from "./firebase"
+
 async function loadProducts(searchString) {
-    const productsJson = await fetch(`https://antoniomotautf2022.github.io/moveisstore.github.io/db.json`)
+    const productsJson = await getItems()
+    console.log(productsJson)
     const productsVector = await productsJson.json()
     const productsVectorFiltered = []
     productsVector.forEach(
