@@ -23,7 +23,7 @@ const collectionQuery = collection(db, "all-products")
 const getItems = () => {
   const q = query(collectionQuery)
   const unsubscribe = onSnapshot(q, (snapshot) => {
-    const researches = []
+    const items = []
     snapshot.forEach( (doc) => {
       researches.push({
         id: doc.id,
@@ -31,7 +31,8 @@ const getItems = () => {
       })
     })
   })
-  return researches
+  console.log(items)
+  return items
 }
 
 export { app, getItems }
