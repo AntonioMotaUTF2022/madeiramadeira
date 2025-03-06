@@ -35,4 +35,6 @@ const getItems = () => {
   return items
 }
 
+getItems()
+
 export { app, getItems }
