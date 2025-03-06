@@ -1,5 +1,5 @@
 async function loadProducts(searchString) {
-    const productsJson = await fetch(`http://localhost:3000/all-products`)
+    const productsJson = await fetch(`https://antoniomotautf2022.github.io/moveisstore.github.io/db.json`)
     const productsVector = await productsJson.json()
     const productsVectorFiltered = []
     productsVector.forEach(
