@@ -1,11 +1,10 @@
-import { api_service } from '../services/api-service.js'
 import { getItems } from '../services/firebase.js'
 
 export default function newProductCard(product) {
     const productCard = document.createElement('a')
     productCard.href = `/show-product.html?id=${product.id}`
     productCard.className = "product-card"
-    productCard.style.backgroundImage = `${product.img[0]}`
+    productCard.style.backgroundImage = product.img
     switch(product.emphasis) {
         case 1 : break
         case 2 :
