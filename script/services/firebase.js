@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-import { initializeFirestore, collection, query, getDocs } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js"
+import { initializeFirestore, collection, query, getDocs, where } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -31,4 +31,15 @@ const getItems = async () => {
   return products
 }
 
-export { getItems }
+const getItemsFilteredByTag = async (tag) => {
+  const q = query(collectionQuery, where("tag", "==", tag))
+  const querySnapshot = await getDocs(q)
+
+  const products = []
+  querySnapshot.forEach( (doc) => {
+    products.push({...doc.data()})
+  })
+  return products
+}
+
+export { getItems, getItemsFilteredByTag }

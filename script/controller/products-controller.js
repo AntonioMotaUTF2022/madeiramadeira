@@ -1,8 +1,8 @@
-import { getItems } from '../services/firebase.js'
+import { getItems, getItemsFilteredByTag } from '../services/firebase.js'
 
 export default function newProductCard(product) {
     const productCard = document.createElement('a')
-    productCard.href = `/show-product.html?id=${product.id}`
+    productCard.href = `/moveisstore.github.io/show-product.html?id=${product.id}`
     productCard.className = "product-card"
     productCard.style.backgroundImage = product.img
     switch(product.emphasis) {
@@ -21,7 +21,7 @@ export default function newProductCard(product) {
     return productCard
 }
 
-async function loadCarousel(carousel) {
+async function loadCarouselAllProducts(carousel) {
     const products = await getItems()
     products.forEach(
         product => {
@@ -32,11 +32,21 @@ async function loadCarousel(carousel) {
     )
 }
 
-loadCarousel(document.querySelector("[carousel-1]"))
+async function loadCarouselByTag(carousel, tag) {
+    const products = await getItemsFilteredByTag(tag)
+    products.forEach(
+        product => {
+            carousel.appendChild(
+                newProductCard(product)
+            )
+        }
+    )
+}
 
-// loadCarousel(document.querySelector("[carousel-2]"), "cozinha")
-// loadCarousel(document.querySelector("[carousel-3]"), "sala de jantar")
-// loadCarousel(document.querySelector("[carousel-4]"), "sala de estar")
-// loadCarousel(document.querySelector("[carousel-5]"), "quarto")
-// loadCarousel(document.querySelector("[carousel-6]"), "escritorio")
-// loadCarousel(document.querySelector("[carousel-7]"), "infantil")
+loadCarouselAllProducts(document.querySelector("[carousel-1]"))
+loadCarouselByTag(document.querySelector("[carousel-2]"), "cozinha")
+loadCarouselByTag(document.querySelector("[carousel-3]"), "sala de jantar")
+loadCarouselByTag(document.querySelector("[carousel-4]"), "sala de estar")
+loadCarouselByTag(document.querySelector("[carousel-5]"), "quarto")
+loadCarouselByTag(document.querySelector("[carousel-6]"), "escritorio")
+loadCarouselByTag(document.querySelector("[carousel-7]"), "infantil")
