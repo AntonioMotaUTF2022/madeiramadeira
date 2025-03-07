@@ -42,4 +42,15 @@ const getItemsFilteredByTag = async (tag) => {
   return products
 }
 
-export { getItems, getItemsFilteredByTag }
+const getItemsFilteredBySearchstring = async (searchString) => {
+  const q = query(collectionQuery, where("title", ">=", searchString))
+  const querySnapshot = await getDocs(q)
+
+  const products = []
+  querySnapshot.forEach( (doc) => {
+    products.push({...doc.data()})
+  })
+  return products
+}
+
+export { getItems, getItemsFilteredByTag, getItemsFilteredBySearchstring }

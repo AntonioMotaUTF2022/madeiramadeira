@@ -1,4 +1,4 @@
-import { api_service } from '../services/api-service.js'
+import { getItemsFilteredBySearchstring } from '../services/firebase.js'
 
 const page = window.location.href
 const searchText = document.querySelector('[search-text]')
@@ -8,7 +8,7 @@ export default function newProductCard(product) {
     const productCard = document.createElement('a')
     productCard.href = `/show-product.html?id=${product.id}`
     productCard.className = "product-card"
-    productCard.style.backgroundImage = `url("/images/products/${product.img[0]}")`
+    productCard.style.backgroundImage = `url("/images/products/${product.img[0]}"`
     switch(product.emphasis) {
         case 1 : break
         case 2 :
@@ -29,7 +29,7 @@ async function loadSearchPage() {
     const urlParams = new URLSearchParams(window.location.search)
     var searchString = urlParams.get('search')
     searchText.value = searchString
-    const products = await api_service.loadProducts(searchString)
+    const products = await getItemsFilteredBySearchstring(searchString)
     const productsContainer = document.querySelector('[products-container]')
     products.forEach(
         product => {
@@ -45,7 +45,7 @@ async function searchProducts() {
     var searchString
     while(productsContainer.firstChild) productsContainer.firstChild.remove()
     searchString = searchText.value
-    const products = await api_service.loadProducts(searchString)
+    const products = await getItemsFilteredBySearchstring(searchString)
     products.forEach(
         product => {
             productsContainer.appendChild(
@@ -62,6 +62,6 @@ if(page.includes('search-products')) {
 }
 
 if(page.includes('index') || page.includes('show-product')) {
-    searchButton.addEventListener('click', () => {window.location.href = `/search-products.html?search=${searchText.value}`})
-    searchText.addEventListener('keypress', (event) => {if(event.key === 'Enter') window.location.href = `/search-products.html?search=${searchText.value}`})
+    searchButton.addEventListener('click', () => {window.location.href = `/moveisstore.github.io/search-products.html?search=${searchText.value}`})
+    searchText.addEventListener('keypress', (event) => {if(event.key === 'Enter') window.location.href = `/moveisstore.github.io/search-products.html?search=${searchText.value}`})
 }
