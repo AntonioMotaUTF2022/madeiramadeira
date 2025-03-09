@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-import { initializeFirestore, collection, query, getDocs, where } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js"
+import { initializeFirestore, collection, query, getDocs, where, getDoc,  doc } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -18,39 +18,51 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = initializeFirestore(app, {experimentalForceLongPolling: true})
-const collectionQuery = collection(db, "all-products")
+const allProductsCollection = collection(db, "all-products")
+const siteImagesCollection = collection(db, "site-imags")
 
 const getItems = async () => {
-  const q = query(collectionQuery)
+  const q = query(allProductsCollection
+  )
   const querySnapshot = await getDocs(q)
 
   const products = []
   querySnapshot.forEach( (doc) => {
-    products.push({...doc.data()})
+    products.push({id: doc.id, ...doc.data()})
   })
   return products
 }
 
+const getItemById = async (id) => {
+  const product = await getDoc(doc(db, "all-products", id))
+  return {id: product.id, ...product.data()}
+}
+
 const getItemsFilteredByTag = async (tag) => {
-  const q = query(collectionQuery, where("tag", "==", tag))
+  const q = query(allProductsCollection, where("tag", "==", tag))
   const querySnapshot = await getDocs(q)
 
   const products = []
   querySnapshot.forEach( (doc) => {
-    products.push({...doc.data()})
+    products.push({id: doc.id, ...doc.data()})
   })
   return products
 }
 
 const getItemsFilteredBySearchstring = async (searchString) => {
-  const q = query(collectionQuery, where("title", ">=", searchString))
+  const q = query(allProductsCollection, where("title", ">=", searchString))
   const querySnapshot = await getDocs(q)
 
   const products = []
   querySnapshot.forEach( (doc) => {
-    products.push({...doc.data()})
+    products.push({id: doc.id, ...doc.data()})
   })
   return products
 }
 
-export { getItems, getItemsFilteredByTag, getItemsFilteredBySearchstring }
+const getSiteImg = async (imgName) => {
+  const imageDoc = await getDoc(doc(db, "site-images", imgName))
+  return imageDoc.data().img
+}
+
+export { getItems, getItemsFilteredByTag, getItemsFilteredBySearchstring, getItemById, getSiteImg }

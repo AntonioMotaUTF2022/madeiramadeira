@@ -1,11 +1,11 @@
-import { api_service } from '../services/api-service.js'
+import { getItemById } from '../services/firebase.js'
 
 const carousel = document.querySelector('[show-product-carousel]')
 const image = document.querySelector('[product-image]')
 const title = document.querySelector('[product-title]')
 
 function productCarouselImageMouseover(productImage, img) {
-    image.src = `/images/products/${img}`
+    image.style.content = img
     for(const child of carousel.children) {
         child.style.borderColor = "rgb(255, 218, 192)"
         child.style.borderWidth = "1px"
@@ -17,7 +17,7 @@ function productCarouselImageMouseover(productImage, img) {
 export default function newShowProductCarouselImage(img) {
     const productImage = document.createElement('a')
     productImage.className = "show-product-carousel-image"
-    productImage.style.backgroundImage = `url("/images/products/${img}")`
+    productImage.style.backgroundImage = img
     productImage.addEventListener("mouseover",
         () => {
             productCarouselImageMouseover(productImage, img)
@@ -28,17 +28,17 @@ export default function newShowProductCarouselImage(img) {
 
 async function loadProductShow() {
     const urlParams = new URLSearchParams(window.location.search)
-    const product = await api_service.loadProduct(urlParams.get('id'))
+    const product = await getItemById(urlParams.get('id'))
     document.title = product.title
     title.innerHTML = product.title
-    product.img.forEach(
+    product.allimgs.forEach(
         img => {
             carousel.appendChild(
                 newShowProductCarouselImage(img)
             )
         }
     )
-    productCarouselImageMouseover(carousel.firstElementChild, product.img[0])
+    productCarouselImageMouseover(carousel.firstElementChild, product.allimgs[0])
 }
 
 loadProductShow()

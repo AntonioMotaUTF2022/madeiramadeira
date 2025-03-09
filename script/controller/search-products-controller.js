@@ -8,7 +8,7 @@ export default function newProductCard(product) {
     const productCard = document.createElement('a')
     productCard.href = `/show-product.html?id=${product.id}`
     productCard.className = "product-card"
-    productCard.style.backgroundImage = `url("/images/products/${product.img[0]}"`
+    productCard.style.backgroundImage = product.allimgs[0]
     switch(product.emphasis) {
         case 1 : break
         case 2 :
@@ -62,6 +62,6 @@ if(page.includes('search-products')) {
 }
 
 if(page.includes('index') || page.includes('show-product')) {
-    searchButton.addEventListener('click', () => {window.location.href = `/moveisstore.github.io/search-products.html?search=${searchText.value}`})
-    searchText.addEventListener('keypress', (event) => {if(event.key === 'Enter') window.location.href = `/moveisstore.github.io/search-products.html?search=${searchText.value}`})
+    searchButton.addEventListener('click', () => {window.location.href = `/search-products.html?search=${searchText.value}`})
+    searchText.addEventListener('keypress', (event) => {if(event.key === 'Enter') window.location.href = `/search-products.html?search=${searchText.value}`})
 }
