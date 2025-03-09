@@ -2,7 +2,7 @@ import { getItems, getItemsFilteredByTag } from '../services/firebase.js'
 
 export default function newProductCard(product) {
     const productCard = document.createElement('a')
-    productCard.href = `/show-product.html?id=${product.id}`
+    productCard.href = `/madeiramadeira/show-product.html?id=${product.id}`
     productCard.className = "product-card"
     productCard.style.backgroundImage = product.allimgs[0]
     switch(product.emphasis) {
